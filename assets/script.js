@@ -29,3 +29,9 @@ for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
         else {
           timeBlock.classList.add("future");
         }
+// Create event input and save button
+const eventInput = document.createElement("input");
+eventInput.type = "text";
+eventInput.placeholder = "Enter event";
+const saveButton = document.createElement("button");
+saveButton.textContent = "Save";
