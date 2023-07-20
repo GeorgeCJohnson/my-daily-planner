@@ -29,7 +29,7 @@ for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
         else {
           timeBlock.classList.add("future");
         }
-
+    }
 // Create event input and save button
 const eventInput = document.createElement("input");
 eventInput.type = "text";
@@ -54,6 +54,6 @@ timeBlock.appendChild(saveButton);
 
 // Append the time block to the container
 container.appendChild(timeBlock);
-    }
+
 });
   
