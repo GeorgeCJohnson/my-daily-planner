@@ -29,9 +29,31 @@ for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
         else {
           timeBlock.classList.add("future");
         }
+
 // Create event input and save button
 const eventInput = document.createElement("input");
 eventInput.type = "text";
 eventInput.placeholder = "Enter event";
 const saveButton = document.createElement("button");
 saveButton.textContent = "Save";
+
+// Load saved events from local storage
+const savedEvent = localStorage.getItem(`event_${hour}`);
+    if (savedEvent) {
+      eventInput.value = savedEvent;
+    }
+
+// Save event to local storage on button click
+saveButton.addEventListener("click", function() {
+localStorage.setItem(`event_${hour}`, eventInput.value);
+});
+
+// Append the elements to the time block
+timeBlock.appendChild(eventInput);
+timeBlock.appendChild(saveButton);
+
+// Append the time block to the container
+container.appendChild(timeBlock);
+    }
+});
+  
