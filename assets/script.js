@@ -4,14 +4,28 @@ document.addEventListener("DOMContentLoaded", function() {
     const today = new Date();
     currentDayElement.textContent = today.toDateString();
 
-  // Generate time blocks for standard business hours
-  const container = document.querySelector(".container");
-  const businessHours = {
+// Generate time blocks for standard business hours
+const container = document.querySelector(".container");
+const businessHours = {
     start: 9,
     end: 17
-  };
+};
 
-  for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
+for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
     const timeBlock = document.createElement("div");
     timeBlock.classList.add("time-block");
     timeBlock.textContent = `${hour}:00`;
+
+// Color-code the time blocks based on past, present, or future
+    const currentTime = new Date().getHours();
+    if (hour < currentTime) {
+        timeBlock.classList.add("past");
+        } 
+        
+        else if (hour === currentTime) {
+          timeBlock.classList.add("present");
+        } 
+        
+        else {
+          timeBlock.classList.add("future");
+        }
