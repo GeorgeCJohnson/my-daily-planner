@@ -25,15 +25,15 @@ document.addEventListener("DOMContentLoaded", function() {
       timeBlock.classList.add("future");
     }
 
-    // Add an ID to uniquely identify each time block (hour-9, hour-10, etc.)
+    // Add an ID to uniquely identify each time block.
     timeBlock.setAttribute("id", `hour-${hour}`);
 
-    // Create the hour label element
+    // Hour label.
     const hourLabel = document.createElement("div");
     hourLabel.classList.add("col-2", "col-md-1", "hour", "text-center", "py-3");
     hourLabel.textContent = hour > 12 ? `${hour - 12}PM` : `${hour}AM`;
 
-    // Create the textarea for event input
+    // Textarea for event input
     const eventInput = document.createElement("textarea");
     eventInput.classList.add("col-8", "col-md-10", "description");
     eventInput.rows = "3";
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
       eventInput.value = savedEvent;
     }
 
-    // Create the save button
+    // Save button
     const saveButton = document.createElement("button");
     saveButton.classList.add("btn", "saveBtn", "col-2", "col-md-1");
     saveButton.setAttribute("aria-label", "save");
