@@ -13,10 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   for (let hour = businessHours.start; hour <= businessHours.end; hour++) {
     const timeBlock = document.createElement("div");
-    timeBlock.classList.add("time-block");
-    timeBlock.textContent = `${hour}:00`;
+    timeBlock.classList.add("row", "time-block");
 
-    // Color-code the time blocks based on past, present, or future
+    // Add the "past", "present", or "future" class based on the current time
     const currentTime = new Date().getHours();
     if (hour < currentTime) {
       timeBlock.classList.add("past");
@@ -26,12 +25,19 @@ document.addEventListener("DOMContentLoaded", function() {
       timeBlock.classList.add("future");
     }
 
-    // Create event input and save button
-    const eventInput = document.createElement("input");
-    eventInput.type = "text";
+    // Add an ID to uniquely identify each time block (hour-9, hour-10, etc.)
+    timeBlock.setAttribute("id", `hour-${hour}`);
+
+    // Create the hour label element
+    const hourLabel = document.createElement("div");
+    hourLabel.classList.add("col-2", "col-md-1", "hour", "text-center", "py-3");
+    hourLabel.textContent = hour > 12 ? `${hour - 12}PM` : `${hour}AM`;
+
+    // Create the textarea for event input
+    const eventInput = document.createElement("textarea");
+    eventInput.classList.add("col-8", "col-md-10", "description");
+    eventInput.rows = "3";
     eventInput.placeholder = "Enter event";
-    const saveButton = document.createElement("button");
-    saveButton.textContent = "Save";
 
     // Load saved events from local storage
     const savedEvent = localStorage.getItem(`event_${hour}`);
@@ -39,12 +45,22 @@ document.addEventListener("DOMContentLoaded", function() {
       eventInput.value = savedEvent;
     }
 
+    // Create the save button
+    const saveButton = document.createElement("button");
+    saveButton.classList.add("btn", "saveBtn", "col-2", "col-md-1");
+    saveButton.setAttribute("aria-label", "save");
+    const saveIcon = document.createElement("i");
+    saveIcon.classList.add("fas", "fa-save");
+    saveIcon.setAttribute("aria-hidden", "true");
+    saveButton.appendChild(saveIcon);
+
     // Save event to local storage on button click
     saveButton.addEventListener("click", function() {
       localStorage.setItem(`event_${hour}`, eventInput.value);
     });
 
-    // Add the elements to the time block
+    // Add elements to the time block
+    timeBlock.appendChild(hourLabel);
     timeBlock.appendChild(eventInput);
     timeBlock.appendChild(saveButton);
 
